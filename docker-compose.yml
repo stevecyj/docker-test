@@ -1,0 +1,34 @@
+version: "3.7"
+services:
+  myweb:
+    build:
+      context: .
+      args:
+        whoami: "Mercedes"
+    image: csteve/myweb:lastest
+    ports:
+      - "8080:80"
+  myweb2:
+    build:
+      context: .
+      args:
+        whoami: "Chris"
+    image: csteve/myweb1:lastest
+    ports:
+      - "8081:80"
+  myweb3:
+    build:
+      context: .
+      args:
+        whoami: "Jane"
+    image: csteve/myweb2:lastest
+    ports:
+      - "8082:80"
+  myweb4:
+    image: csteve/myweb:lastest
+    ports:
+      - "8083:80"
+networks:
+  default:
+    external:
+      name: my-bridge
