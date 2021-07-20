@@ -1,34 +1,60 @@
-version: "3.7"
+version: '3.7'
 services:
   myweb:
     build:
       context: .
       args:
-        whoami: "Mercedes"
+        whoami: 'Mercedes'
     image: csteve/myweb:lastest
     ports:
-      - "8080:80"
+      - '8080:80'
+    networks:
+      - mybridgw001
   myweb2:
     build:
       context: .
       args:
-        whoami: "Chris"
+        whoami: 'Chris'
     image: csteve/myweb1:lastest
     ports:
-      - "8081:80"
+      - '8081:80'
+    networks:
+      - mybridgw001
   myweb3:
     build:
       context: .
       args:
-        whoami: "Jane"
+        whoami: 'Jane'
     image: csteve/myweb2:lastest
     ports:
-      - "8082:80"
+      - '8082:80'
+    networks:
+      - mybridgw001
   myweb4:
     image: csteve/myweb:lastest
     ports:
-      - "8083:80"
+      - '8083:80'
+    networks:
+      - mybridgw002
+  myweb5:
+    image: csteve/myweb:lastest
+    ports:
+      - '8084:80'
+    networks:
+      - mybridgw002
+    volumes:
+      - mainpage-vol002:/var/www/localhost/htdocs/
+
 networks:
+  mybridgw001:
+    external:
+      name: my-bridg1001
+  mybridgw002:
+    external:
+      name: my-bridg1002
   default:
     external:
       name: my-bridge
+
+volumes:
+  mainpage-vol002:
